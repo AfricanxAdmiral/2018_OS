@@ -48,10 +48,10 @@ int main(void)
 
                 // Execute the shell program
                 pid_t pid;
-                if(!background) while(wait(NULL) != -1); // For spec asked to reap all zombie process if not background
+                
                 pid = fork();
                 if(!pid) execvp(params[0], params);
-                else if(!background) wait(NULL);
+                else if(!background) waitpid(pid, NULL, 0);
         }
         return 0;
 }
